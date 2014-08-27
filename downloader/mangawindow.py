@@ -1,0 +1,63 @@
+import os
+from downloader.mangawindowparser import MangaWindowParser
+from downloader.mangawindowpageparser import MangaWindowPageParser
+from subprocess import call
+import urllib
+import zipfile
+
+__author__ = 'pablo'
+import urllib.request
+
+class MangaWindow():
+    def __init__(self, url, out_folder):
+        self.url = url
+        self.chapters_url = None
+        self.out_folder = out_folder
+
+        if not os.path.exists(self.out_folder):
+            os.makedirs(self.out_folder)
+
+    def extract_all_chapters_url(self):
+        if self.url is None:
+            return
+
+        response = urllib.request.urlopen(self.url)
+        data = response.read()
+        parser = MangaWindowParser()
+        parser.reset_status()
+        parser.feed(str(data))
+        self.chapters_url = parser.urls
+        print("Number of URLS: ", len(self.chapters_url))
+
+    def download_each_chapter(self):
+        for url in self.chapters_url:
+            pages, img_base = self.get_image_information(url)
+            print("Pages from {} are {} with base url {}".format(url, pages, img_base))
+            subfolder = self.out_folder + "/" + url.split('/')[-2]
+            print(subfolder)
+
+            if not os.path.exists(subfolder):
+                os.makedirs(subfolder)
+            zf = zipfile.ZipFile(subfolder + ".cbr", mode='w')
+
+            for i in range(1, int(pages)):
+                img = "{}{}.jpg".format(img_base, i)
+                print("DOWNLOAD: ", img)
+                localimg = img.split('/')[-1]
+                print("DOWNLOADX: ", localimg)
+                print("Subfolder: ", subfolder)
+
+                urllib.request.urlretrieve(img, subfolder + "/" + localimg)
+                zf.write(subfolder + "/" + localimg)
+
+                #call(["wget", "-P", subfolder, img])
+                #call(["zip", "-r", subfolder + ".cbr", subfolder])
+            zf.close()
+
+    def get_image_information(self, url):
+        page_response = urllib.request.urlopen(url)
+        data = page_response.read()
+        parser = MangaWindowPageParser()
+        parser.init_status()
+        parser.feed(str(data))
+        return parser.pages, parser.img_base_url[:-5]
