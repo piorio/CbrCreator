@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QTableWidgetItem
 from downloader.MangaWindow import MangaWindow
 from gui.new_dialog import NewDialog
@@ -61,7 +61,8 @@ class MainWindow(QMainWindow):
         for chapter, url in urls_list.items():
             chapter_item = QTableWidgetItem(chapter)
             url_item = QTableWidgetItem(url)
-            download_item = QTableWidgetItem('YES')
+            download_item = QTableWidgetItem('TO DOWNLOAD')
+            download_item.setCheckState(Qt.Checked)
 
             self.ui.chapters_table_widget.setItem(row_index, 0, chapter_item)
             self.ui.chapters_table_widget.setItem(row_index, 1, download_item)
