@@ -26,8 +26,19 @@ class MangaWindow():
         parser = MangaWindowParser()
         parser.reset_status()
         parser.feed(str(data))
-        self.chapters_url = parser.urls
-        print("Number of URLS: ", len(self.chapters_url))
+        #self.chapters_url = parser.urls
+
+        self.chapters_url = {}
+
+        for url in parser.urls:
+            chapter = url.split('/')[-2]
+            #To order the 'c1' must be change to c01
+            if len(chapter) == 2:
+                char_array = list(chapter)
+                chapter = "".join(char_array[0:1] + ['0'] + char_array[1:])
+            self.chapters_url[chapter] = url
+
+        return self.chapters_url
 
     def download_each_chapter(self):
         for url in self.chapters_url:

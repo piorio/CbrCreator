@@ -4,7 +4,7 @@ from gui.mainwindow import MainWindow
 from gui.ui_MainWindow import Ui_MainWindow
 
 __author__ = 'pablo'
-from downloader import mangawindow
+from downloader import MangaWindow
 
 def main():
 

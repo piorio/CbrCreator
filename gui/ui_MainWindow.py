@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Thu Aug 28 11:50:17 2014
+# Created: Thu Aug 28 13:51:49 2014
 #      by: PyQt5 UI code generator 5.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -103,9 +103,9 @@ class Ui_MainWindow(object):
         item = self.chapters_table_widget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "CHAPTER"))
         item = self.chapters_table_widget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "URL"))
-        item = self.chapters_table_widget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "DOWNLOAD"))
+        item = self.chapters_table_widget.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "URL"))
         self.menu_File.setTitle(_translate("MainWindow", "&File"))
         self.menu_Tool.setTitle(_translate("MainWindow", "&Tool"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))

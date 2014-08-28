@@ -83,7 +83,7 @@
         </column>
         <column>
          <property name="text">
-          <string>URL</string>
+          <string>DOWNLOAD</string>
          </property>
          <property name="font">
           <font>
@@ -93,7 +93,7 @@
         </column>
         <column>
          <property name="text">
-          <string>DOWNLOAD</string>
+          <string>URL</string>
          </property>
          <property name="font">
           <font>

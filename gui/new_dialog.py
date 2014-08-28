@@ -6,15 +6,20 @@ __author__ = 'pablo'
 
 
 class NewDialog(QDialog):
-    def __init__(self):
+    def __init__(self, list_of_engines):
         super(NewDialog, self).__init__()
 
         self.url = None
         self.destination = None
+        self.engine = None
 
         # Set up the user interface from Designer.
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
+
+        #Set default value
+        self.ui.downloader_combo_box.addItems(list_of_engines)
+        self.engine = self.ui.downloader_combo_box.currentText()
 
         #Disable the OK button
         self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
@@ -23,6 +28,7 @@ class NewDialog(QDialog):
         self.ui.url_line_edit.textEdited.connect(self.on_url_line_edit_finish)
         self.ui.destination_line_edit.textChanged.connect(self.on_destination_line_edit_finish)
         self.ui.destination_push_button.clicked.connect(self.on_destination_button_clicked)
+        self.ui.downloader_combo_box.currentTextChanged.connect(self.on_downloader_change)
 
     @pyqtSlot(str)
     def on_url_line_edit_finish(self, text):
@@ -45,3 +51,7 @@ class NewDialog(QDialog):
                                                     QDir.homePath(),
                                                     QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
         self.ui.destination_line_edit.setText(filename)
+
+    @pyqtSlot(str)
+    def on_downloader_change(self, text):
+        self.engine = text
