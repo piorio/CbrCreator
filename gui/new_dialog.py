@@ -1,5 +1,5 @@
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QPushButton
+from PyQt5.QtCore import pyqtSlot, QCoreApplication, QDir
+from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QPushButton, QFileDialog
 from gui.ui_NewDialog import Ui_Dialog
 
 __author__ = 'pablo'
@@ -21,7 +21,8 @@ class NewDialog(QDialog):
 
         #Connect
         self.ui.url_line_edit.textEdited.connect(self.on_url_line_edit_finish)
-        self.ui.destination_line_edit.textEdited.connect(self.on_destination_line_edit_finish)
+        self.ui.destination_line_edit.textChanged.connect(self.on_destination_line_edit_finish)
+        self.ui.destination_push_button.clicked.connect(self.on_destination_button_clicked)
 
     @pyqtSlot(str)
     def on_url_line_edit_finish(self, text):
@@ -38,3 +39,9 @@ class NewDialog(QDialog):
             self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
         else:
             self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
+
+    def on_destination_button_clicked(self):
+        filename = QFileDialog.getExistingDirectory(self, QCoreApplication.translate('NewDialog', 'Output folder'),
+                                                    QDir.homePath(),
+                                                    QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+        self.ui.destination_line_edit.setText(filename)
