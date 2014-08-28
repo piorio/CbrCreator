@@ -14,6 +14,7 @@ class MainWindow(QMainWindow):
         self.url = None
         self.destination = None
         self.engine = None
+        self.downloader = None
 
         # Set up the user interface from Designer.
         self.ui = Ui_MainWindow()
@@ -23,6 +24,7 @@ class MainWindow(QMainWindow):
         self.ui.action_Quit.triggered.connect(self.quit)
         self.ui.action_New.triggered.connect(self.on_new)
         self.ui.actionDownload_chapters.triggered.connect(self.on_download_chapters_triggered)
+        self.ui.actionStart_download.triggered.connect(self.on_start_download_triggered)
 
         #Setup default value
         self.ui.chapters_table_widget.horizontalHeader().setStretchLastSection(True)
@@ -45,14 +47,25 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def on_download_chapters_triggered(self):
 
-        #engine_to_use = __import__('downloader.'+self.engine)
-        #engine_to_use = getattr(engine_to_use, self.engine)
-
         engine_to_use = MainWindow.get_class('downloader.' + self.engine + '.' + self.engine)
-        downloader = engine_to_use(self.url, self.destination)
+        self.downloader = engine_to_use(self.url, self.destination)
 
-        urls_list = downloader.extract_all_chapters_url()
+        urls_list = self.downloader.extract_all_chapters_url()
         self.fill_table(urls_list)
+        self.ui.actionStart_download.setEnabled(True)
+
+    @pyqtSlot()
+    def on_start_download_triggered(self):
+        print('start')
+        table_size = self.ui.chapters_table_widget.rowCount()
+        for i in range(0, table_size):
+            #print()
+            if self.ui.chapters_table_widget.item(i, 1).checkState() == Qt.Checked:
+                chapter = self.ui.chapters_table_widget.item(i, 0).text()
+                url = self.ui.chapters_table_widget.item(i, 2).text()
+                print("{}->{}".format(chapter, url))
+                self.downloader.download_specific_chapter(url,chapter)
+
 
     def fill_table(self, urls_list):
         row_index = 0

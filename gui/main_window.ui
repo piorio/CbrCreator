@@ -129,6 +129,7 @@
      <string>&amp;Tool</string>
     </property>
     <addaction name="actionDownload_chapters"/>
+    <addaction name="actionStart_download"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Tool"/>
@@ -146,6 +147,7 @@
    </attribute>
    <addaction name="action_New"/>
    <addaction name="actionDownload_chapters"/>
+   <addaction name="actionStart_download"/>
   </widget>
   <widget class="QToolBar" name="toolBar_2">
    <property name="windowTitle">
@@ -174,6 +176,14 @@
    </property>
    <property name="text">
     <string>Download chapters</string>
+   </property>
+  </action>
+  <action name="actionStart_download">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Start download</string>
    </property>
   </action>
  </widget>

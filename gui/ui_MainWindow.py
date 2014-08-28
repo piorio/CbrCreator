@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Thu Aug 28 13:51:49 2014
+# Created: Thu Aug 28 14:30:04 2014
 #      by: PyQt5 UI code generator 5.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -84,14 +84,19 @@ class Ui_MainWindow(object):
         self.actionDownload_chapters = QtWidgets.QAction(MainWindow)
         self.actionDownload_chapters.setEnabled(False)
         self.actionDownload_chapters.setObjectName("actionDownload_chapters")
+        self.actionStart_download = QtWidgets.QAction(MainWindow)
+        self.actionStart_download.setEnabled(False)
+        self.actionStart_download.setObjectName("actionStart_download")
         self.menu_File.addAction(self.action_New)
         self.menu_File.addSeparator()
         self.menu_File.addAction(self.action_Quit)
         self.menu_Tool.addAction(self.actionDownload_chapters)
+        self.menu_Tool.addAction(self.actionStart_download)
         self.menubar.addAction(self.menu_File.menuAction())
         self.menubar.addAction(self.menu_Tool.menuAction())
         self.toolBar.addAction(self.action_New)
         self.toolBar.addAction(self.actionDownload_chapters)
+        self.toolBar.addAction(self.actionStart_download)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -113,4 +118,5 @@ class Ui_MainWindow(object):
         self.action_New.setText(_translate("MainWindow", "&New..."))
         self.action_Quit.setText(_translate("MainWindow", "&Quit"))
         self.actionDownload_chapters.setText(_translate("MainWindow", "Download chapters"))
+        self.actionStart_download.setText(_translate("MainWindow", "Start download"))
 
