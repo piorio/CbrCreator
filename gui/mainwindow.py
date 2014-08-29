@@ -67,22 +67,21 @@ class MainWindow(QMainWindow):
             if self.ui.chapters_table_widget.item(i, 1).checkState() == Qt.Checked:
                 chapter = self.ui.chapters_table_widget.item(i, 0).text()
                 url = self.ui.chapters_table_widget.item(i, 2).text()
-                print("{}->{}".format(chapter, url))
+                #print("{}->{}".format(chapter, url))
                 p = Process(target=self.downloader.download_specific_chapter, args=(url, chapter,))
                 p.start()
                 process_list.append(p)
 
         for p in process_list:
-            print("JOIN " + str(p))
+            #print("JOIN " + str(p))
             p.join()
 
         QMessageBox.information(self, 'Download', 'Finish')
 
-
     def fill_table(self, urls_list):
         row_index = 0
         self.ui.chapters_table_widget.setRowCount(len(urls_list))
-        print(urls_list)
+        #print(urls_list)
         for chapter, url in urls_list.items():
             chapter_item = QTableWidgetItem(chapter)
             url_item = QTableWidgetItem(url)
@@ -98,10 +97,10 @@ class MainWindow(QMainWindow):
         self.ui.chapters_table_widget.resizeColumnsToContents()
         self.ui.chapters_table_widget.sortItems(0)
 
-    def get_class( kls ):
+    def get_class(kls):
         parts = kls.split('.')
         module = ".".join(parts[:-1])
-        m = __import__( module )
+        m = __import__(module)
         for comp in parts[1:]:
             m = getattr(m, comp)
         return m
