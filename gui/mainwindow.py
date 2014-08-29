@@ -1,8 +1,9 @@
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QTableWidgetItem, QMessageBox
 from downloader.MangaWindow import MangaWindow
 from gui.new_dialog import NewDialog
 from gui.ui_MainWindow import Ui_MainWindow
+from multiprocessing import Process
 
 __author__ = 'pablo'
 
@@ -59,12 +60,17 @@ class MainWindow(QMainWindow):
         print('start')
         table_size = self.ui.chapters_table_widget.rowCount()
         for i in range(0, table_size):
-            #print()
             if self.ui.chapters_table_widget.item(i, 1).checkState() == Qt.Checked:
                 chapter = self.ui.chapters_table_widget.item(i, 0).text()
                 url = self.ui.chapters_table_widget.item(i, 2).text()
                 print("{}->{}".format(chapter, url))
-                self.downloader.download_specific_chapter(url,chapter)
+                p = Process(target=self.downloader.download_specific_chapter, args=(url, chapter,))
+                p.start()
+
+                #p.join()
+                #self.downloader.download_specific_chapter(url, chapter)
+
+        #QMessageBox.information(self, 'Download', 'Finish')
 
 
     def fill_table(self, urls_list):

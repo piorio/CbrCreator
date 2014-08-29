@@ -41,24 +41,16 @@ class MangaWindow():
 
     def download_specific_chapter(self, url, chapter):
         pages, img_base = self.get_image_information(url)
-        print("Pages from {} are {} with base url {}".format(url, pages, img_base))
-        subfolder = self.out_folder + "/" + chapter
-        print(subfolder)
-        if not os.path.exists(subfolder):
-            os.makedirs(subfolder)
-        zf = zipfile.ZipFile(subfolder + ".cbr", mode='w')
-        for i in range(1, int(pages)):
+        print("For {} we have {} imgs".format(chapter, pages))
+        sub_folder = self.out_folder + "/" + chapter
+        if not os.path.exists(sub_folder):
+            os.makedirs(sub_folder)
+        zf = zipfile.ZipFile(sub_folder + ".cbr", mode='w')
+        for i in range(1, int(pages) + 1):
             img = "{}{}.jpg".format(img_base, i)
-            print("DOWNLOAD: ", img)
-            localimg = img.split('/')[-1]
-            print("DOWNLOADX: ", localimg)
-            print("Subfolder: ", subfolder)
-
-            urllib.request.urlretrieve(img, subfolder + "/" + localimg)
-            zf.write(subfolder + "/" + localimg)
-
-            #call(["wget", "-P", subfolder, img])
-            #call(["zip", "-r", subfolder + ".cbr", subfolder])
+            local_img = img.split('/')[-1]
+            urllib.request.urlretrieve(img, sub_folder + "/" + local_img)
+            zf.write(sub_folder + "/" + local_img)
         zf.close()
 
     def download_each_chapter(self):
