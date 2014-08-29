@@ -52,8 +52,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_download_chapters_triggered(self):
-
-        engine_to_use = MainWindow.get_class('downloader.' + self.engine + '.' + self.engine)
+        engine_to_use = MainWindow.get_class(self.configuration['plugins'][self.engine])
         self.downloader = engine_to_use(self.url, self.destination)
 
         urls_list = self.downloader.extract_all_chapters_url()
