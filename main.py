@@ -1,18 +1,19 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication
 import sys
 from gui.mainwindow import MainWindow
+import json
 from gui.ui_MainWindow import Ui_MainWindow
+
 
 __author__ = 'pablo'
 from downloader import MangaWindow
 
 def main():
+    json_data = open('configuration.json')
+    data = json.load(json_data)
 
-    #test = mangawindow.MangaWindow('http://www.mangawindow.com/manga/original-work-warau-kangofu', '/tmp/prova')
-    #test.extract_all_chapters_url()
-    #test.download_each_chapter()
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = MainWindow(data)
 
     window.show()
     sys.exit(app.exec_())

@@ -9,13 +9,18 @@ __author__ = 'pablo'
 
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, configuration):
         super(MainWindow, self).__init__()
 
         self.url = None
         self.destination = None
         self.engine = None
         self.downloader = None
+        self.configuration = configuration
+
+        for plugin in self.configuration['plugins']:
+            print(plugin)
+            print(self.configuration['plugins'][plugin])
 
         # Set up the user interface from Designer.
         self.ui = Ui_MainWindow()
