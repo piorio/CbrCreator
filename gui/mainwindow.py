@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_start_download_triggered(self):
-        print('start')
+        process_list = []
         table_size = self.ui.chapters_table_widget.rowCount()
         for i in range(0, table_size):
             if self.ui.chapters_table_widget.item(i, 1).checkState() == Qt.Checked:
@@ -66,11 +66,13 @@ class MainWindow(QMainWindow):
                 print("{}->{}".format(chapter, url))
                 p = Process(target=self.downloader.download_specific_chapter, args=(url, chapter,))
                 p.start()
+                process_list.append(p)
 
-                #p.join()
-                #self.downloader.download_specific_chapter(url, chapter)
+        for p in process_list:
+            print("JOIN " + str(p))
+            p.join()
 
-        #QMessageBox.information(self, 'Download', 'Finish')
+        QMessageBox.information(self, 'Download', 'Finish')
 
 
     def fill_table(self, urls_list):
