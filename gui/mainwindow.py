@@ -17,10 +17,10 @@ class MainWindow(QMainWindow):
         self.engine = None
         self.downloader = None
         self.configuration = configuration
+        self.plugins_list = []
 
         for plugin in self.configuration['plugins']:
-            print(plugin)
-            print(self.configuration['plugins'][plugin])
+            self.plugins_list.append(plugin)
 
         # Set up the user interface from Designer.
         self.ui = Ui_MainWindow()
@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_new(self):
-        new_dialog = NewDialog(['MangaWindow'])
+        new_dialog = NewDialog(self.plugins_list)
         if new_dialog.exec() == QDialog.Accepted:
             self.ui.actionDownload_chapters.setEnabled(True)
 
