@@ -31,6 +31,7 @@ class MainWindow(QMainWindow):
         self.ui.action_New.triggered.connect(self.on_new)
         self.ui.actionDownload_chapters.triggered.connect(self.on_download_chapters_triggered)
         self.ui.actionStart_download.triggered.connect(self.on_start_download_triggered)
+        self.ui.actionCreate_CBR.triggered.connect(self.on_create_cbr_triggered)
 
         #Setup default value
         self.ui.chapters_table_widget.horizontalHeader().setStretchLastSection(True)
@@ -77,6 +78,9 @@ class MainWindow(QMainWindow):
             p.join()
 
         QMessageBox.information(self, 'Download', 'Finish')
+
+    def on_create_cbr_triggered(self):
+        pass
 
     def fill_table(self, urls_list):
         row_index = 0

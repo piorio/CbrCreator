@@ -130,6 +130,8 @@
     </property>
     <addaction name="actionDownload_chapters"/>
     <addaction name="actionStart_download"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_CBR"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Tool"/>
@@ -184,6 +186,11 @@
    </property>
    <property name="text">
     <string>Start download</string>
+   </property>
+  </action>
+  <action name="actionCreate_CBR">
+   <property name="text">
+    <string>Create CBR</string>
    </property>
   </action>
  </widget>

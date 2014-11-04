@@ -1,6 +1,6 @@
 {
     "plugins" : {
         "MangaWindow" : "downloader.MangaWindow.MangaWindow",
-        "TEST" : "downloader.MangaWindow.TEST"
+        "MangaEden" : "downloader.MangaEden.MangaEden"
     }
 }

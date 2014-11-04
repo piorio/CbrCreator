@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Thu Aug 28 14:30:04 2014
+# Created: Fri Aug 29 14:41:39 2014
 #      by: PyQt5 UI code generator 5.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -87,11 +87,15 @@ class Ui_MainWindow(object):
         self.actionStart_download = QtWidgets.QAction(MainWindow)
         self.actionStart_download.setEnabled(False)
         self.actionStart_download.setObjectName("actionStart_download")
+        self.actionCreate_CBR = QtWidgets.QAction(MainWindow)
+        self.actionCreate_CBR.setObjectName("actionCreate_CBR")
         self.menu_File.addAction(self.action_New)
         self.menu_File.addSeparator()
         self.menu_File.addAction(self.action_Quit)
         self.menu_Tool.addAction(self.actionDownload_chapters)
         self.menu_Tool.addAction(self.actionStart_download)
+        self.menu_Tool.addSeparator()
+        self.menu_Tool.addAction(self.actionCreate_CBR)
         self.menubar.addAction(self.menu_File.menuAction())
         self.menubar.addAction(self.menu_Tool.menuAction())
         self.toolBar.addAction(self.action_New)
@@ -119,4 +123,5 @@ class Ui_MainWindow(object):
         self.action_Quit.setText(_translate("MainWindow", "&Quit"))
         self.actionDownload_chapters.setText(_translate("MainWindow", "Download chapters"))
         self.actionStart_download.setText(_translate("MainWindow", "Start download"))
+        self.actionCreate_CBR.setText(_translate("MainWindow", "Create CBR"))
 
