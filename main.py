@@ -3,6 +3,7 @@ import sys
 from downloader.MangaEden import MangaEden
 from gui.mainwindow import MainWindow
 import json
+from downloader.download_engine import DownloadEngine
 from gui.ui_MainWindow import Ui_MainWindow
 
 
@@ -25,6 +26,13 @@ def main2():
     for d in test.chapters_url:
         print(d)
 
+def main3():
+    prova = DownloadEngine('http://www.mangawindow.com/manga/to-love-ru-darkness', 'downloader.MangaWindow.MangaWindow',
+                           "https{0,1}://(www.mangawindow.com)/manga/([a-zA-Z-+]+)")
+    print(prova)
+    print(prova.is_valid)
+    prova.prepare_engine()
+
 
 if __name__ == "__main__":
-    main()
+    main3()

@@ -1,6 +1,12 @@
 {
     "plugins" : {
-        "MangaWindow" : "downloader.MangaWindow.MangaWindow",
-        "MangaEden" : "downloader.MangaEden.MangaEden"
+        "MangaWindow" : {
+            "engine" : "downloader.MangaWindow.MangaWindow",
+            "expression" : "https{0,1}://(www.mangawindow.com)/manga/([a-zA-Z-+]+)"
+        },
+        "MangaEden" : {
+            "engine" : "downloader.MangaEden.MangaEden"
+            "expression" : "xxxxx"
+        }
     }
 }

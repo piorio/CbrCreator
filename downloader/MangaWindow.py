@@ -8,6 +8,7 @@ import zipfile
 __author__ = 'pablo'
 import urllib.request
 
+
 class MangaWindow():
     def __init__(self, url, out_folder):
         self.url = url
